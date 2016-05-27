@@ -8,11 +8,17 @@ class DocsController < ApplicationController
   end
 
   def new
-    # code
+    @doc = Doc.new
   end
 
   def create
-    # code
+    @doc = Doc.new(doc_params)
+
+    if @doc.save
+      redirect_to @doc
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -34,6 +40,6 @@ class DocsController < ApplicationController
   end
 
   def doc_params
-    # code
+    params.require (:doc).permit(:title, :content)
   end
 end
